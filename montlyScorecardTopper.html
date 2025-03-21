@@ -1,0 +1,172 @@
+<template>
+    <div>
+        <div class="slds-page-header">
+            <div class="slds-page-header__row">
+              <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                  <div class="slds-media__figure">
+                    <span title="opportunity">
+                        <div style="padding-top: 25px;">
+                        <lightning-icon  icon-name="standard:promotions_workspace" alternative-text="Preview" title="Preview"></lightning-icon>
+                    </div>
+                      <span class="slds-assistive-text"></span>
+                    </span>
+                  </div>
+                  <div class="slds-media__body">
+                    <div class="slds-page-header__name">
+                      <div class="slds-page-header__name-title">
+                        <h1>
+                          <span style="padding-top: 30px;" class="slds-page-header__title slds-truncate" >INFINITY SCORECARD TOP PERFORMERS - {Mon}'{currentYear}</span>
+                        </h1>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div style="padding-top: 2px; padding-right:3%; ">
+              <lightning-combobox value={year} style="width: 150%;"
+                options={YearValues} onchange={handleyearChange} >
+            </lightning-combobox></div> 
+            <div style="padding-top: 2px; padding-right:3%; ">
+                <lightning-combobox value={month} style="width: 150%;"
+                options={MonthValues} onchange={handleMonthChange} >
+              </lightning-combobox></div>             
+            <div style="padding-top: 18px; padding-right:0.5%; ">
+            <lightning-button label="Download" variant="brand" icon-name="utility:download" style="width: 60%;"
+             onclick={exportContactData}>
+            </lightning-button></div>
+            
+            </div>
+          </div>
+        
+        
+    
+    <lightning-layout multiple-rows>
+        <template if:true={firstboolen} for:each={first} for:item="cvalue">
+            
+            
+                <lightning-layout-item key={cvalue.UserName} style="padding-left:6.5%;">
+                    <div class="block-container" style="align-items: center;">
+                    <lightning-icon icon-name="utility:opportunity" style="margin-left: 33%;"></lightning-icon>
+                    <div class="card-font" style="margin-left: 3%; padding-top: 2%;"><b>FIRST</b></div> 
+                    </div>
+                    <div class="slds-boxs">
+                    <div class="card">
+                        <div class="card-top-background" >
+                        </div>
+                        <div class="card-body">
+                            <img src={cvalue.Picture} class="card-person-image"
+                                alt="User" />
+                                <div class="card-bottom-background">
+
+                                    <div class="card-font">
+                                           {cvalue.UserName}</div>
+                                           <div class="card-score">
+                                           Score : {cvalue.Rscore} </div>
+                                           
+                                   
+                                            <div class="garage-title" > {cvalue.UserSalesArea} </div>
+                                            {cvalue.UserEmail}
+                                </div>
+                            </div>
+                    </div></div>
+                </lightning-layout-item></lightning-card>
+    </template>
+
+   
+    <template if:true={secondboolen} for:each={second} for:item="cvalue">
+        <lightning-layout-item key={cvalue.UserName} class="lightning-layout-item" style="padding-left: 6.5%;">
+            
+            <div class="block-container" style="align-items: center;">
+                <lightning-icon icon-name="utility:opportunity" style="margin-left: 25%;"></lightning-icon>
+                <div class="card-font" style="margin-left: 3%; padding-top: 2%;"><b>SECOND</b></div> 
+                </div>
+                <div class="slds-boxs">
+            <div class="card">
+                <div style="background-color: #4ccf9d;padding: 20%;">
+                </div>
+                <div class="card-body">
+                    <img src={cvalue.Picture} class="card-person-image"
+                        alt="User" />
+                        <div class="card-bottom-background">
+
+                            <div class="card-font">
+                                   {cvalue.UserName}</div>
+                                   <div class="card-score">
+                                   Score : {cvalue.Rscore} </div>
+                                   
+                           
+                                    <div class="garage-title" > {cvalue.UserSalesArea} </div>
+                                    {cvalue.UserEmail}
+                        </div>
+                </div>
+            </div>
+        </div>
+        </lightning-layout-item></template>
+    <template if:true={thirdboolen} for:each={third} for:item="cvalue">
+        <lightning-layout-item key={cvalue.UserName} class="lightning-layout-item" style="padding-left: 6.5%;" >
+            
+            <div class="block-container" style="align-items: center;">
+                <lightning-icon icon-name="utility:opportunity" style="margin-left: 30%;"></lightning-icon>
+                <div class="card-font" style="margin-left: 3%; padding-top: 2%;"><b>THIRD</b></div> 
+                </div>
+                <div class="slds-boxs">
+            <div class="card">
+                <div style="background-color: #fc9167;padding: 20%;">
+                </div>
+                <div class="card-body">
+                    <img src={cvalue.Picture} class="card-person-image"
+                        alt="User" />
+                        <div class="card-bottom-background">
+
+                            <div class="card-font">
+                                   {cvalue.UserName}</div>
+                                   <div class="card-score">
+                                   Score : {cvalue.Rscore} </div>
+                                   
+                           
+                                    <div class="garage-title" > {cvalue.UserSalesArea} </div>
+                                    {cvalue.UserEmail}
+                        </div>
+                </div>
+            </div></div>
+            
+        </lightning-layout-item></template>
+       
+        
+    </lightning-layout> 
+    <template if:true={datatable}>
+    <div style="padding-top: 3%;">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>KAM</th>
+                    <th>Sales Area</th>
+                    <th>Area Type</th>
+                    <th>Score</th>
+                    <th>Email</th>
+                   
+                </tr>
+
+            </thead>
+            <tbody>
+                <template for:each={data} for:item="user">
+                    <tr key={user.UserName}>
+                        <td><b>{user.Index}</b></td>
+                        <td><lightning-avatar size="large" src={user.Picture}></lightning-avatar>&nbsp;&nbsp;<b>{user.UserName}</b></td>
+                        
+                        <td>{user.UserSalesArea}</td>
+                        <td>{user.UserAreaType}</td>
+                        <td style="color: #1ca02e;"><b>{user.Rscore}</b></td>
+                        <td><a href="#" tabindex="-1"><b>{user.UserEmail}</b></a></td>
+                        
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+                        </div>
+                    </template></lightning-card>
+</div>
+
+</template>
